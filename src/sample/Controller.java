@@ -6,4 +6,8 @@ public class Controller {
     public String toUnpackedBCD(int number) {
         return converter.toUnpackedBCD(number);
     }
+
+    public String toPackedBCD(int number) {
+        return converter.toPackedBCD(number);
+    }
 }
