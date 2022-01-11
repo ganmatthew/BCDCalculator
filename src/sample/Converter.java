@@ -15,4 +15,18 @@ public class Converter {
         }
         return unpackedBCD;
     }
+
+    public String toPackedBCD(int number) {
+        String convert = String.valueOf(number);
+        String packedBCD = "";
+
+        char[] digits = convert.toCharArray();
+
+        for (char digit : digits) {
+            String binary = Integer.toBinaryString(Character.getNumericValue(digit));
+            packedBCD = packedBCD.concat(String.format("%4s", binary)
+                    .replace(' ', '0'));
+        }
+        return packedBCD;
+    }
 }
