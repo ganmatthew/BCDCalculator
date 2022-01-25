@@ -5,31 +5,37 @@ import java.util.Arrays;
 public class Converter {
 
     public String toUnpackedBCD (int number) {
-        String convert = String.valueOf(number);
-        String unpackedBCD = "";
-
-        char[] digits = convert.toCharArray();
-
-        for (char digit : digits) {
-            String binary = Integer.toBinaryString(Character.getNumericValue(digit));
-            unpackedBCD = unpackedBCD.concat(String.format("%8s", binary)
-                    .replace(' ', '0'));
-        }
-        return unpackedBCD;
+        return converter("%8s", number);
     }
-
     public String toPackedBCD(int number) {
+        return converter("%4s", number);
+    }
+    public String converter(String format, int number) {
+        boolean negative = false;
+        //if negative, convert to positive
+        if(number<0) {
+            negative = true;
+            number*=-1;
+        }
         String convert = String.valueOf(number);
-        String packedBCD = "";
+        String converted = "";
+
 
         char[] digits = convert.toCharArray();
 
         for (char digit : digits) {
             String binary = Integer.toBinaryString(Character.getNumericValue(digit));
-            packedBCD = packedBCD.concat(String.format("%4s", binary)
+            converted = converted.concat(String.format(format, binary)
                     .replace(' ', '0'));
         }
-        return packedBCD;
+
+        //if negative, add negative sign at Least significant
+        if(negative) {
+            converted = converted.concat(String.format(format, "1101")
+                    .replace(' ', '0'));
+        }
+
+        return converted;
     }
 
     public String toDenselyPackedBCD(int number) {
