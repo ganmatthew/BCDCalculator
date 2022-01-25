@@ -13,12 +13,29 @@ public class ConverterTest {
         assert unpackedBCD.equals("0000010100000010");
     }
     @Test
+    void test_negative_decimal_to_unpackedBCD () {
+        Converter converter = new Converter();
+
+        String unpackedBCD = converter.toUnpackedBCD(-910);
+        System.out.println("UnpackedBcd: " + unpackedBCD);
+
+        assert unpackedBCD.equals("00001001000000010000000000001101");
+    }
+    @Test
     void test_decimal_to_packedBCD () {
         Converter converter = new Converter();
 
         String packedBCD = converter.toPackedBCD(256);
         System.out.println("packedBCD: " + packedBCD);
         assert packedBCD.equals("001001010110");
+    }
+    @Test
+    void test_negative_decimal_to_packedBCD () {
+        Converter converter = new Converter();
+
+        String packedBCD = converter.toPackedBCD(-250);
+        System.out.println("packedBCD: " + packedBCD);
+        assert packedBCD.equals("0010010100001101");
     }
     @Test
     void test_decimal_to_densely_packedBCD_1() {
