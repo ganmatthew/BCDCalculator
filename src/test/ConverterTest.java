@@ -24,7 +24,7 @@ public class ConverterTest {
     void test_decimal_to_densely_packedBCD_1() {
         Converter converter = new Converter();
 
-        String denselyPackedBCD = converter.toDenselyPackedBCD("010010001001");
+        String denselyPackedBCD = converter.toDenselyPackedBCD(489);
         System.out.println("denselyPackedBCD: " + denselyPackedBCD);
         assert denselyPackedBCD.equals("1001001111");
     }
@@ -32,7 +32,7 @@ public class ConverterTest {
     void test_decimal_to_densely_packedBCD_2 () {
         Converter converter = new Converter();
 
-        String denselyPackedBCD = converter.toDenselyPackedBCD("010100110010");
+        String denselyPackedBCD = converter.toDenselyPackedBCD(532);
         System.out.println("denselyPackedBCD: " + denselyPackedBCD);
         assert denselyPackedBCD.equals("1010110010");
     }
@@ -40,7 +40,7 @@ public class ConverterTest {
     void test_decimal_to_densely_packedBCD_3 () {
         Converter converter = new Converter();
 
-        String denselyPackedBCD = converter.toDenselyPackedBCD("000100100011");
+        String denselyPackedBCD = converter.toDenselyPackedBCD(123);
         System.out.println("denselyPackedBCD: " + denselyPackedBCD);
         assert denselyPackedBCD.equals("0010100011");
     }
@@ -48,7 +48,7 @@ public class ConverterTest {
     void test_decimal_to_densely_packedBCD_4 () {
         Converter converter = new Converter();
 
-        String denselyPackedBCD = converter.toDenselyPackedBCD("001010000000");
+        String denselyPackedBCD = converter.toDenselyPackedBCD(280);
         System.out.println("denselyPackedBCD: " + denselyPackedBCD);
         assert denselyPackedBCD.equals("0100001010");
     }

@@ -11,5 +11,5 @@ public class Controller {
         return converter.toPackedBCD(number);
     }
 
-    public String toDenselyPackedBCD(String number) { return converter.toDenselyPackedBCD(number); }
+    public String toDenselyPackedBCD(int number) { return converter.toDenselyPackedBCD(number); }
 }

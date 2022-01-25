@@ -32,8 +32,8 @@ public class Converter {
         return packedBCD;
     }
 
-    public String toDenselyPackedBCD(String str) {
-        char[] packed = str.toCharArray();
+    public String toDenselyPackedBCD(int number) {
+        char[] packed = String.valueOf(this.toPackedBCD(number)).toCharArray();
         char[] keys = new char[]{ packed[0], packed[4], packed[8] }; // iea
 
         if (Arrays.equals(keys, new char[]{'0', '0', '0'})) {
