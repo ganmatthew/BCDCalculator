@@ -10,4 +10,6 @@ public class Controller {
     public String toPackedBCD(int number) {
         return converter.toPackedBCD(number);
     }
+
+    public String toDenselyPackedBCD(String number) { return converter.toDenselyPackedBCD(number); }
 }
