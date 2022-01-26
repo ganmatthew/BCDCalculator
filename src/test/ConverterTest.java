@@ -69,4 +69,12 @@ public class ConverterTest {
         System.out.println("denselyPackedBCD: " + denselyPackedBCD);
         assert denselyPackedBCD.equals("0100001010");
     }
+    @Test
+    void test_ignore_negative_decimal_to_densely_packedBCD() {
+        Converter converter = new Converter();
+
+        String denselyPackedBCD = converter.decimalToDenselyPackedBCD(-489);
+        System.out.println("denselyPackedBCD: " + denselyPackedBCD);
+        assert denselyPackedBCD.equals("1001001111");
+    }
 }

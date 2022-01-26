@@ -29,7 +29,7 @@ public class Converter {
                     .replace(' ', '0'));
         }
 
-        // if negative, add negative sign at LS nibble
+        // if negative, add 1101 at LS nibble
         if (negative) {
             converted = converted.concat(String.format(format, "1101")
                     .replace(' ', '0'));
@@ -38,7 +38,11 @@ public class Converter {
         return converted;
     }
 
-    public String decimalToDenselyPackedBCD(int number) { return convertToDenselyPacked(String.valueOf(this.decimalToPackedBCD(number)).toCharArray()); }
+    public String decimalToDenselyPackedBCD(int number) {
+        // if negative, convert to positive
+        number *= (number < 0) ? -1 : 1;
+        return convertToDenselyPacked(String.valueOf(this.decimalToPackedBCD(number)).toCharArray());
+    }
 
     private String convertToDenselyPacked(char[] packed) {
         char[] keys = new char[]{ packed[0], packed[4], packed[8] }; // iea
