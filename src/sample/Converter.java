@@ -4,18 +4,18 @@ import java.util.Arrays;
 
 public class Converter {
 
-    public String toUnpackedBCD (int number) {
-        return converter("%8s", number);
+    public String decimalToUnpackedBCD(int number) {
+        return convertToBCD("%8s", number);
     }
-    public String toPackedBCD(int number) {
-        return converter("%4s", number);
+    public String decimalToPackedBCD(int number) {
+        return convertToBCD("%4s", number);
     }
-    public String converter(String format, int number) {
+    private String convertToBCD(String format, int number) {
         boolean negative = false;
-        //if negative, convert to positive
-        if(number<0) {
+        // if negative, convert to positive but flag as negative
+        if (number < 0) {
             negative = true;
-            number*=-1;
+            number *= -1;
         }
         String convert = String.valueOf(number);
         String converted = "";
@@ -29,8 +29,8 @@ public class Converter {
                     .replace(' ', '0'));
         }
 
-        //if negative, add negative sign at Least significant
-        if(negative) {
+        // if negative, add negative sign at LS nibble
+        if (negative) {
             converted = converted.concat(String.format(format, "1101")
                     .replace(' ', '0'));
         }
@@ -38,60 +38,62 @@ public class Converter {
         return converted;
     }
 
-    public String toDenselyPackedBCD(int number) {
-        char[] packed = String.valueOf(this.toPackedBCD(number)).toCharArray();
+    public String decimalToDenselyPackedBCD(int number) { return convertToDenselyPacked(String.valueOf(this.decimalToPackedBCD(number)).toCharArray()); }
+
+    private String convertToDenselyPacked(char[] packed) {
         char[] keys = new char[]{ packed[0], packed[4], packed[8] }; // iea
 
         if (Arrays.equals(keys, new char[]{'0', '0', '0'})) {
             return new String(new char[]{
-                packed[1], packed[2], packed[3],            // bcd
-                packed[5], packed[6], packed[7],            // fgh
-                '0', packed[9], packed[10], packed[11]      // 0jkm
+                    packed[1], packed[2], packed[3],            // bcd
+                    packed[5], packed[6], packed[7],            // fgh
+                    '0', packed[9], packed[10], packed[11]      // 0jkm
             });
         } else if (Arrays.equals(keys, new char[]{'0', '0', '1'})) {
             return new String(new char[]{
-                packed[1], packed[2], packed[3],            // bcd
-                packed[5], packed[6], packed[7],            // fgh
-                '1', '0', '0', packed[11]                   // 100m
+                    packed[1], packed[2], packed[3],            // bcd
+                    packed[5], packed[6], packed[7],            // fgh
+                    '1', '0', '0', packed[11]                   // 100m
             });
         } else if (Arrays.equals(keys, new char[]{'0', '1', '0'})) {
             return new String(new char[]{
-                packed[1], packed[2], packed[3],            // bcd
-                packed[9], packed[10], packed[7],           // jkh
-                '1', '0', '1', packed[11]                   // 100m
+                    packed[1], packed[2], packed[3],            // bcd
+                    packed[9], packed[10], packed[7],           // jkh
+                    '1', '0', '1', packed[11]                   // 100m
             });
         } else if (Arrays.equals(keys, new char[]{'0', '1', '1'})) {
             return new String(new char[]{
-                packed[1], packed[2], packed[3],            // bcd
-                '1', '0', packed[7],                        // 10h
-                '1', '1', '1', packed[11]                   // 111m
+                    packed[1], packed[2], packed[3],            // bcd
+                    '1', '0', packed[7],                        // 10h
+                    '1', '1', '1', packed[11]                   // 111m
             });
         } else if (Arrays.equals(keys, new char[]{'1', '0', '0'})) {
             return new String(new char[]{
-                packed[9], packed[10], packed[3],           // jkd
-                packed[5], packed[6], packed[7],            // fgh
-                '1', '1', '0', packed[11]                   // 110m
+                    packed[9], packed[10], packed[3],           // jkd
+                    packed[5], packed[6], packed[7],            // fgh
+                    '1', '1', '0', packed[11]                   // 110m
             });
         } else if (Arrays.equals(keys, new char[]{'1', '0', '1'})) {
             return new String(new char[]{
-                packed[5], packed[6], packed[3],            // fgd
-                '0', '1', packed[7],                        // 01h
-                '1', '1', '1', packed[11]                   // 111m
+                    packed[5], packed[6], packed[3],            // fgd
+                    '0', '1', packed[7],                        // 01h
+                    '1', '1', '1', packed[11]                   // 111m
             });
         } else if (Arrays.equals(keys, new char[]{'1', '1', '0'})) {
             return new String(new char[]{
-                packed[9], packed[10], packed[3],           // jkd
-                '0', '0', packed[7],                        // 00h
-                '1', '1', '1', packed[11]                   // 111m
+                    packed[9], packed[10], packed[3],           // jkd
+                    '0', '0', packed[7],                        // 00h
+                    '1', '1', '1', packed[11]                   // 111m
             });
         } else if (Arrays.equals(keys, new char[]{'1', '1', '1'})) {
             return new String(new char[]{
-                '0', '0', packed[3],                        // 00d
-                '1', '1', packed[7],                        // 11h
-                '1', '1', '1', packed[11]                   // 111m
+                    '0', '0', packed[3],                        // 00d
+                    '1', '1', packed[7],                        // 11h
+                    '1', '1', '1', packed[11]                   // 111m
             });
         }
 
         return "";
     }
+
 }
