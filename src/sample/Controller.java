@@ -12,4 +12,9 @@ public class Controller {
     }
 
     public String toDenselyPackedBCD(int number) { return converter.decimalToDenselyPackedBCD(number); }
+
+    public int toDecimal(String dense) {
+        return converter.denselyPackedBCDtoDecimal(dense); 
+    }
+
 }
