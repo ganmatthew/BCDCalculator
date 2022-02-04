@@ -1,6 +1,6 @@
 package test;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 import sample.Converter;
 
 public class ConverterTest {
