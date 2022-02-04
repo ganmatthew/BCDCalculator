@@ -101,7 +101,6 @@ public class Converter {
     }
 
     public int denselyPackedBCDtoDecimal(String dense){
-       
         return convertToDecimal(dense.toCharArray());
     }
 
@@ -126,36 +125,36 @@ public class Converter {
         else if (keys[0] == '1' && keys[1] == '0' && keys[2] == '1') {
             packed = new char[]{ '0',
                     dense[0], dense[1], dense[2], '1',          // pqr
-                    '0', '0', dense[5], '0',          // stu
+                    '0', '0', dense[5], '0',                    // stu
                     dense[3], dense[4], dense[9]                // wxy
             };
         }
         else if (keys[0] == '1' && keys[1] == '1' && keys[2] == '0') {
             packed = new char[]{ '1',
-                    '0', '0', dense[2], '0',          // pqr
-                    dense[3], dense[4], dense[5],'0',          // stu
+                    '0', '0', dense[2], '0',                    // pqr
+                    dense[3], dense[4], dense[5],'0',           // stu
                     dense[0], dense[1], dense[9]                // wxy
             };
         }
         else if (Arrays.equals(keys, new char[]{'1', '1', '1', '0', '0'})) {
             packed = new char[]{ '1',
-                    '0', '0', dense[2], '1',          // pqr
-                    '0', '0', dense[5], '0',          // stu
+                    '0', '0', dense[2], '1',                    // pqr
+                    '0', '0', dense[5], '0',                    // stu
                     dense[0], dense[1], dense[9]                // wxy
             };
         }
         else if (Arrays.equals(keys, new char[]{'1', '1', '1', '0', '1'})) {
             packed = new char[]{ '1',
-                    '0', '0', dense[2], '0',          // pqr
+                    '0', '0', dense[2], '0',                    // pqr
                     dense[0], dense[1], dense[5], '1',          // stu
-                    '0', '0', dense[9]                // wxy
+                    '0', '0', dense[9]                          // wxy
             };
         }
         else if (Arrays.equals(keys, new char[]{'1', '1', '1', '1', '0'})) {
             packed = new char[]{ '0',
                     dense[0], dense[1], dense[2], '1',          // pqr
-                    '0', '0', dense[5], '1',          // stu
-                    '0', '0', dense[9]                // wxy
+                    '0', '0', dense[5], '1',                    // stu
+                    '0', '0', dense[9]                          // wxy
             };
         }
         else if (Arrays.equals(keys, new char[]{'1', '1', '1', '1', '1'})) {
@@ -165,21 +164,20 @@ public class Converter {
                     '0', '0', dense[9]                // wxy
             };
         }
-        System.out.println(packed);
-        for(int i = 0;i<12;i++){
-            int mult = 1;
-            if(packed[i]=='1'){
-                if(i >= 0 && i<=3){
-                    mult=100;
+        //System.out.println(packed);
+        for (int i = 0; i < 12; i++){
+            if (packed[i] == '1'){
+                int mult = 1;
+                if (i <= 3){
+                    mult = 100;
+                } else if (i <= 7){
+                    mult = 10;
                 }
-                if(i >= 4 && i<=7){
-                    mult=10;
-                }
-                int e = 3-(i%4);
-                decimal+=((Math.pow(2,e)*mult));
+                int e = 3 - (i % 4);
+                decimal += ((Math.pow(2,e) * mult));
             }
         }
-        
+
         return decimal;
     }
 
