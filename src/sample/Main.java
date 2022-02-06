@@ -57,6 +57,18 @@ public class Main extends Application {
         hbBtn.setAlignment(Pos.CENTER);
         hbBtn.getChildren().add(txt);
         grid.add(hbBtn, 1, 7);
+
+        txt.setOnAction(actionEvent -> {
+            String decimal = outputDecimal.getText().isEmpty() ?
+                    inputDecimal.getText() : outputDecimal.getText();
+
+            controller.export(
+                    decimal,
+                    outputDensely.getText(),
+                    outputPacked.getText(),
+                    outputUnpacked.getText()
+            );
+        });
     }
 
     public void displayReset(){
