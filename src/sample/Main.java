@@ -21,6 +21,9 @@ public class Main extends Application {
     private TextField outputUnpacked;
     private TextField outputDecimal;
 
+    TextField inputDecimal;
+    TextField inputDensely;
+
     private final Controller controller = new Controller();
 
     @Override
@@ -66,10 +69,14 @@ public class Main extends Application {
         grid.add(hbBtn, 1, 9);
 
         reset.setOnAction(actionEvent -> {
-            outputUnpacked.setText(" ");
-            outputPacked.setText(" ");
-            outputDensely.setText(" ");
-            outputDecimal.setText(" ");
+            outputUnpacked.setText("");
+            outputPacked.setText("");
+            outputDensely.setText("");
+            outputDecimal.setText("");
+
+            inputDecimal.setText("");
+            inputDensely.setText("");
+
         });
     }
 
@@ -84,7 +91,7 @@ public class Main extends Application {
         grid.add(enterdecimal, 0, 1, 2, 1);
 
         // TEXTFIELD for decimal input
-        TextField inputDecimal = new TextField();
+        inputDecimal = new TextField();
         inputDecimal.setPrefSize(300, 100);
         grid.add(inputDecimal, 0, 2);
 
@@ -109,7 +116,7 @@ public class Main extends Application {
         grid.add(enterdensely, 0, 3, 2, 1);
 
         // text field for densely packed input
-        TextField inputDensely = new TextField();
+        inputDensely = new TextField();
         inputDensely.setPrefSize(300, 100);
         grid.add(inputDensely, 0, 4);
 
@@ -121,6 +128,11 @@ public class Main extends Application {
         hbBtn2.setAlignment(Pos.CENTER);
         hbBtn2.getChildren().add(btn2);
         grid.add(hbBtn2, 1, 4);
+
+        btn2.setOnAction(actionEvent -> {
+            String dense = inputDensely.getText();
+            outputDecimal.setText(Integer.toString(controller.toDecimal(dense)));
+        });
     }
 
     public void displayOutputs(){
