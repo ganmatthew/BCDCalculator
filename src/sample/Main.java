@@ -1,8 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,14 +21,10 @@ public class Main extends Application {
     private TextField outputUnpacked;
     private TextField outputDecimal;
 
-    private Text unpacked;
-    private Text packed;
-    private Text densely;
-
-    private Controller controller = new Controller();
+    private final Controller controller = new Controller();
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage){
 
         primaryStage.setTitle("BCD Calculator");
 
@@ -71,14 +65,11 @@ public class Main extends Application {
         hbBtn.getChildren().add(reset);
         grid.add(hbBtn, 1, 9);
 
-        reset.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                outputUnpacked.setText(" ");
-                outputPacked.setText(" ");
-                outputDensely.setText(" ");
-                outputDecimal.setText(" ");
-            }
+        reset.setOnAction(actionEvent -> {
+            outputUnpacked.setText(" ");
+            outputPacked.setText(" ");
+            outputDensely.setText(" ");
+            outputDecimal.setText(" ");
         });
     }
 
@@ -106,14 +97,11 @@ public class Main extends Application {
         hbBtn.getChildren().add(btn1);
         grid.add(hbBtn, 1, 2);
 
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                String dec = inputDecimal.getText();
-                outputUnpacked.setText(controller.toUnpackedBCD(Integer.parseInt(dec)));
-                outputDensely.setText(controller.toDenselyPackedBCD(Integer.parseInt(dec)));
-                outputPacked.setText(controller.toPackedBCD(Integer.parseInt(dec)));
-            }
+        btn1.setOnAction(actionEvent -> {
+            String dec = inputDecimal.getText();
+            outputUnpacked.setText(controller.toUnpackedBCD(Integer.parseInt(dec)));
+            outputDensely.setText(controller.toDenselyPackedBCD(Integer.parseInt(dec)));
+            outputPacked.setText(controller.toPackedBCD(Integer.parseInt(dec)));
         });
 
         Text enterdensely = new Text("Enter Densely-Packed BCD:");
@@ -141,7 +129,7 @@ public class Main extends Application {
         grid.add(output, 0, 5, 2, 1);
 
         // text field for densely packed out
-        densely = new Text("Densely-Packed BCD:");
+        Text densely = new Text("Densely-Packed BCD:");
         densely.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         grid.add(densely, 0, 6, 2, 1);
 
@@ -152,7 +140,7 @@ public class Main extends Application {
         grid.add(outputDensely, 0, 7);
 
         // text field for packed out
-        packed = new Text("Packed BCD:");
+        Text packed = new Text("Packed BCD:");
         packed.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         grid.add(packed, 0, 8, 2, 1);
 
@@ -163,7 +151,7 @@ public class Main extends Application {
         grid.add(outputPacked, 0, 9);
 
         // text field for packed out
-        unpacked = new Text("Unpacked BCD:");
+        Text unpacked = new Text("Unpacked BCD:");
         unpacked.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         grid.add(unpacked, 0, 10, 2, 1);
 
