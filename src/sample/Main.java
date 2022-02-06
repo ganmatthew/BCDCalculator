@@ -44,6 +44,7 @@ public class Main extends Application {
         displayInputs();
         displayOutputs();
         displayTxtFile();
+        displayReset();
 
         primaryStage.setScene(new Scene(grid, 550, 650));
 
@@ -59,6 +60,26 @@ public class Main extends Application {
         hbBtn.setAlignment(Pos.CENTER);
         hbBtn.getChildren().add(txt);
         grid.add(hbBtn, 1, 7);
+    }
+
+    public void displayReset(){
+        Button reset = new Button("Reset");
+        reset.setPrefWidth(150);
+        reset.setPrefHeight(70);
+        HBox hbBtn = new HBox(5);
+        hbBtn.setAlignment(Pos.CENTER);
+        hbBtn.getChildren().add(reset);
+        grid.add(hbBtn, 1, 9);
+
+        reset.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                outputUnpacked.setText(" ");
+                outputPacked.setText(" ");
+                outputDensely.setText(" ");
+                outputDecimal.setText(" ");
+            }
+        });
     }
 
     public void displayInputs(){
