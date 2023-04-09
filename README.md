@@ -22,6 +22,6 @@ Created as part of coursework for CSARCH2 (Introduction to Computer Organization
 # Credits
 - [@ganmatthew](https://github.com/ganmatthew)
 - [@manoloenriquez](https://github.com/manoloenriquez)
-- [@migmo](https://github.com/migmo)
+- [@migsmo](https://github.com/migsmo)
 - [@nicscheng](https://github.com/nicscheng)
 - [@RANrvz](https://github.com/RANrvz)
